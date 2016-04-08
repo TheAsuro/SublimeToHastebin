@@ -1,3 +1,6 @@
+#This Fork
+is just my personal variation on the [original plugin](https://github.com/nicetrysean/SublimeToHastebin). Maybe one day I'll properly integrate the functionality and make a pull request.
+
 #ToHastebin!
 ---------------------
 
