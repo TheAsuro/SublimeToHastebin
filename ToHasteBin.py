@@ -29,9 +29,13 @@ class SendToHasteBinCommand( sublime_plugin.TextCommand ):
 		for region in self.view.sel():
 
 			if not region.empty():
-				content = self.view.substr(region).encode('utf8')
+				infoline = 'File: ' + self.view.file_name() + '    Lines: ' + str(self.view.rowcol(self.view.lines(region)[0].begin())[0] + 1) + ' to ' + str(self.view.rowcol(self.view.lines(region)[-1].begin())[0] + 1)
+				text = self.view.substr(region)
 			else:
-				content = self.view.substr(sublime.Region(0, self.view.size())).encode('utf8')
+				infoline = 'File: ' + self.view.file_name()
+				text = self.view.substr(sublime.Region(0, self.view.size()))
+
+			content = (infoline + '\r\n\r\n' + text).encode('utf8')
 			req = ulib.Request(URL, content)
 			response = ulib.urlopen(req)
 			the_page = response.read()
